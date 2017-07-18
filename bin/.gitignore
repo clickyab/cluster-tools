@@ -1,0 +1,9 @@
+*
+!.gitignore
+!*.sh
+!env_check
+!compile
+!detect
+!release
+!build
+!build/*
