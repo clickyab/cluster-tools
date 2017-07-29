@@ -7,69 +7,53 @@
 	],
 	"Deps": [
 		{
-			"ImportPath": "github.com/GeertJohan/go.rice",
-			"Rev": "c02ca9a983da5807ddf7d796784928f5be4afd09"
-		},
-		{
-			"ImportPath": "github.com/GeertJohan/go.rice/embedded",
-			"Rev": "c02ca9a983da5807ddf7d796784928f5be4afd09"
-		},
-		{
 			"ImportPath": "github.com/Sirupsen/logrus",
-			"Comment": "1.0.2-2-g51dc0fc",
-			"Rev": "51dc0fc64317a2861273909081f9c315786533eb"
+			"Comment": "v0.11.5-46-g5e5dc89",
+			"Rev": "5e5dc898656f695e2a086b8e12559febbfc01562"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/array",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/assert",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/config",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/framework",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/framework/middleware",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/framework/router",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/initializer",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/safe",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/shell",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/trans",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/version",
-			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
-		},
-		{
-			"ImportPath": "github.com/daaku/go.zipexe",
-			"Rev": "a5fe2436ffcb3236e175e5149162b41cd28bd27d"
-		},
-		{
-			"ImportPath": "github.com/kardianos/osext",
-			"Rev": "ae77be60afb1dcacde03767a8c37337fad28ac14"
+			"Rev": "e2a4f1d54939855dced039b39b6a51dc2e91d6be"
 		},
 		{
 			"ImportPath": "github.com/mssola/user_agent",
@@ -78,13 +62,13 @@
 		},
 		{
 			"ImportPath": "github.com/rs/cors",
-			"Comment": "v.1.1",
+			"Comment": "v1.0-5-g8dd4211",
 			"Rev": "8dd4211afb5d08dbb39a533b9bb9e4b486351df6"
 		},
 		{
 			"ImportPath": "github.com/rs/xhandler",
-			"Comment": "v.11-5-g1eb70cf",
-			"Rev": "1eb70cf1520d43c307a89c5dabb7a7efd132fccd"
+			"Comment": "v.11-2-gfe78910",
+			"Rev": "fe789104c7f474ee779e6d39c745f15c6a950dc2"
 		},
 		{
 			"ImportPath": "github.com/rs/xmux",
@@ -92,7 +76,12 @@
 		},
 		{
 			"ImportPath": "golang.org/x/sys/unix",
-			"Rev": "fb4cac33e3196ff7f507ab9b2d2a44b0142f5b5a"
+			"Rev": "dbc2be9168a660ef302e04b6ff6406de6f967473"
+		},
+		{
+			"ImportPath": "gopkg.in/fzerorubigd/onion.v2",
+			"Comment": "v1.0.0-13-g0789309",
+			"Rev": "078930955df67fe99807c7099902a5282796521f"
 		},
 		{
 			"ImportPath": "gopkg.in/fzerorubigd/onion.v3",
@@ -111,7 +100,7 @@
 		},
 		{
 			"ImportPath": "gopkg.in/yaml.v2",
-			"Rev": "3b4ad1db5b2a649883ff3782f5f9f6fb52be71af"
+			"Rev": "cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b"
 		}
 	]
 }
