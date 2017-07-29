@@ -1,0 +1,117 @@
+{
+	"ImportPath": "clickyab.com/cluster-tools",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/GeertJohan/go.rice",
+			"Rev": "c02ca9a983da5807ddf7d796784928f5be4afd09"
+		},
+		{
+			"ImportPath": "github.com/GeertJohan/go.rice/embedded",
+			"Rev": "c02ca9a983da5807ddf7d796784928f5be4afd09"
+		},
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "1.0.2-2-g51dc0fc",
+			"Rev": "51dc0fc64317a2861273909081f9c315786533eb"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/array",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/assert",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/config",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/framework",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/framework/middleware",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/framework/router",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/initializer",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/safe",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/shell",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/trans",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/clickyab/services/version",
+			"Rev": "fa65aee8ec61c7de506150828cc99f60731495ed"
+		},
+		{
+			"ImportPath": "github.com/daaku/go.zipexe",
+			"Rev": "a5fe2436ffcb3236e175e5149162b41cd28bd27d"
+		},
+		{
+			"ImportPath": "github.com/kardianos/osext",
+			"Rev": "ae77be60afb1dcacde03767a8c37337fad28ac14"
+		},
+		{
+			"ImportPath": "github.com/mssola/user_agent",
+			"Comment": "v0.4.1-20-g07efe2b",
+			"Rev": "07efe2b857fb8c02d2dd85c12d0145f58554ec7c"
+		},
+		{
+			"ImportPath": "github.com/rs/cors",
+			"Comment": "v.1.1",
+			"Rev": "8dd4211afb5d08dbb39a533b9bb9e4b486351df6"
+		},
+		{
+			"ImportPath": "github.com/rs/xhandler",
+			"Comment": "v.11-5-g1eb70cf",
+			"Rev": "1eb70cf1520d43c307a89c5dabb7a7efd132fccd"
+		},
+		{
+			"ImportPath": "github.com/rs/xmux",
+			"Rev": "d379109ea970568fad9197dd3795934ba1a85c05"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "fb4cac33e3196ff7f507ab9b2d2a44b0142f5b5a"
+		},
+		{
+			"ImportPath": "gopkg.in/fzerorubigd/onion.v3",
+			"Comment": "v1.0.0-17-g21ad47e",
+			"Rev": "21ad47ed240a3d9e517c900435b371ed2c4bbd94"
+		},
+		{
+			"ImportPath": "gopkg.in/fzerorubigd/onion.v3/extraenv",
+			"Comment": "v1.0.0-17-g21ad47e",
+			"Rev": "21ad47ed240a3d9e517c900435b371ed2c4bbd94"
+		},
+		{
+			"ImportPath": "gopkg.in/fzerorubigd/onion.v3/yamlloader",
+			"Comment": "v1.0.0-17-g21ad47e",
+			"Rev": "21ad47ed240a3d9e517c900435b371ed2c4bbd94"
+		},
+		{
+			"ImportPath": "gopkg.in/yaml.v2",
+			"Rev": "3b4ad1db5b2a649883ff3782f5f9f6fb52be71af"
+		}
+	]
+}
