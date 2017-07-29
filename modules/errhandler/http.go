@@ -10,8 +10,10 @@ import (
 type initRouter struct {
 }
 
-func (initRouter) Routes(mux *xmux.Mux, mountPoint string) {
-	mux.GET(mountPoint+"/", xhandler.HandlerFuncC(errCheck))
+// Ignoring the mount path
+func (initRouter) Routes(mux *xmux.Mux, _ string) {
+	mux.GET("/healthz", xhandler.HandlerFuncC(healthz))
+	mux.GET("/", xhandler.HandlerFuncC(errCheck))
 }
 
 func init() {

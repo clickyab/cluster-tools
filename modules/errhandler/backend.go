@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/clickyab/services/array"
 	"github.com/mssola/user_agent"
 )
 
@@ -23,15 +24,18 @@ const errTemplate = `
 </html>
 `
 
-func errCheck(ctx context.Context, w http.ResponseWriter, r *http.Request) {
+var (
+	browsers = []string{"Mozilla", "Opera", "Edge", "Chrome", "Chromium", "Internet Explorer"}
+)
+
+func errCheck(_ context.Context, w http.ResponseWriter, r *http.Request) {
 	ua := user_agent.New(r.UserAgent())
 	name, _ := ua.Browser()
-	if name == "Mozilla" || name == "Opera" || name == "Edge" || name == "Chrome" || name == "Chromium" || name == "Internet Explorer" {
+	if array.StringInArray(name, browsers...) {
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte(errTemplate))
 		return
 	}
 	w.WriteHeader(http.StatusNotFound)
-	w.Write([]byte("error occurred 404"))
-
+	w.Write([]byte(http.StatusText(http.StatusNotFound)))
 }

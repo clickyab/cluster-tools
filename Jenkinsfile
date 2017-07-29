@@ -14,4 +14,8 @@ node {
         checkout scm
         sh "./bin/ci-test.sh test"
     }
+    stage('Deploy into k8s') {
+        checkout scm
+        sh "APP=default-http-backend bash ./bin/herokutor.sh `pwd`"
+    }
 }
