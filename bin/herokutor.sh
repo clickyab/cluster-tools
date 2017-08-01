@@ -94,4 +94,5 @@ echo "${BUILD_DIR}" >> /tmp/kill-me
 echo "${BUILD_PACKS_DIR}" >> /tmp/kill-me
 
 kubectl -n nginx-ingress set image deployment  default-http-backend default-http-backend=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
+kubectl -n monitoring set image deployment  mysql-slave-monitor mysql-slave-monitor=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
 

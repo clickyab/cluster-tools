@@ -16,6 +16,6 @@ node {
     }
     stage('Deploy into k8s') {
         checkout scm
-        sh "APP=default-http-backend bash ./bin/herokutor.sh `pwd`"
+        sh "APP=cluster-tools bash ./bin/herokutor.sh `pwd`"
     }
 }
