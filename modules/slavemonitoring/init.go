@@ -19,12 +19,7 @@ var (
 type route struct{}
 
 func (route) Routes(mux *xmux.Mux, moountPoint string) {
-	mux.GET("/healthz", xhandler.HandlerFuncC(healthz))
 	mux.GET("/:dbnum/healthz", xhandler.HandlerFuncC(monitor))
-}
-
-func healthz(ctx context.Context, w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(200)
 }
 
 func monitor(ctx context.Context, w http.ResponseWriter, r *http.Request) {
