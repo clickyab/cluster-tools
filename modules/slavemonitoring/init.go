@@ -38,8 +38,8 @@ func monitor(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 
 	err = mysql.PingDB(dbIndex)
 	if err != nil {
-		w.Write([]byte(err.Error()))
 		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
 		return
 	}
 
