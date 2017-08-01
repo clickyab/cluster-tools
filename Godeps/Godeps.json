@@ -13,63 +13,63 @@
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/array",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/assert",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/config",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/framework",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/framework/middleware",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/framework/router",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/healthz",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/initializer",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/migration",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/mysql",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/mysql/connection/mysql",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/safe",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/shell",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/trans",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/clickyab/services/version",
-			"Rev": "52cd8b17e81f4ea3f0eb0a230bdace84e7ead3bc"
+			"Rev": "b740d215c2165ef313cad7e99c62887ff6a03a29"
 		},
 		{
 			"ImportPath": "github.com/fzerorubigd/sql-migrate",
