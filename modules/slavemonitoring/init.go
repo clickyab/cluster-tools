@@ -4,31 +4,19 @@ import (
 	"context"
 	"net/http"
 	"regexp"
-
-	"strings"
-
-	"github.com/clickyab/services/mysql"
-
 	"strconv"
 
-	"github.com/clickyab/services/config"
 	"github.com/clickyab/services/framework/router"
-	"github.com/clickyab/services/initializer"
+	"github.com/clickyab/services/mysql"
 	"github.com/rs/xhandler"
 	"github.com/rs/xmux"
 )
 
 var (
-	regex       = regexp.MustCompile(`db(/d+)`)
-	rdsnSlice   = config.RegisterString("services.mysql.rdsn", "root:bita123@tcp(127.0.0.1:3306)/?charset=utf8&parseTime=true", "comma separated read database dsn")
-	connections []string
+	regex = regexp.MustCompile(`db(/d+)`)
 )
 
 type route struct{}
-
-func (route) Initialize(ctx context.Context) {
-	connections = strings.Split(rdsnSlice.String(), ",")
-}
 
 func (route) Routes(mux *xmux.Mux, moountPoint string) {
 	mux.GET("/healthz", xhandler.HandlerFuncC(healthz))
@@ -55,7 +43,7 @@ func monitor(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 
 	err = mysql.PingDB(dbIndex)
 	if err != nil {
-		w.Write([]byte(err))
+		w.Write([]byte(err.Error()))
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -65,6 +53,5 @@ func monitor(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 }
 
 func init() {
-	initializer.Register(route{}, 1)
 	router.Register(route{})
 }
