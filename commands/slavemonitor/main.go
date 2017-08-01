@@ -11,8 +11,8 @@ import (
 
 const (
 	org    string = "clickyab"
-	app           = "default-http-backend"
-	prefix        = "DHB"
+	app           = "slave-mon"
+	prefix        = "SM"
 )
 
 func main() {
