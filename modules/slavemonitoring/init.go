@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	regex = regexp.MustCompile(`db(/d+)`)
+	regex = regexp.MustCompile(`db(\d+)`)
 )
 
 type route struct{}
