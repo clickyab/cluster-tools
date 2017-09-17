@@ -7,7 +7,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/clickyab/services/assert"
 	"github.com/clickyab/services/config"
 	"github.com/clickyab/services/framework/middleware"
@@ -15,6 +14,7 @@ import (
 	"github.com/rs/cors"
 	"github.com/rs/xhandler"
 	"github.com/rs/xmux"
+	"github.com/sirupsen/logrus"
 	onion "gopkg.in/fzerorubigd/onion.v3"
 )
 
@@ -39,6 +39,9 @@ type initer struct {
 func (i *initer) Initialize(ctx context.Context) {
 	engine = xmux.New()
 	c := cors.New(cors.Options{
+		AllowCredentials: true,
+		AllowedMethods:   []string{"GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"},
+		AllowedHeaders:   []string{"token", "content-type"},
 		AllowOriginFunc: func(origin string) bool {
 			return true // TODO : write the real code here
 		},

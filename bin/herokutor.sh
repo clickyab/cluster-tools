@@ -60,16 +60,31 @@ done< <(env -0)
 
 TEMPORARY=$(mktemp -d)
 
+cat ${TEMPORARY}/rice.sh <<EORICE
+set -eo pipefail
+
+export GOROOT=${CACHE_FOLDER}/${GOVERSION}/go
+export PATH=${PATH}:${GOROOT}/bin
+
+
+
+EORICE
+
 # Create Rockerfile to build with rocker (the Dockerfile enhancer tool)
 cat > ${TEMPORARY}/Rockerfile <<EOF
 FROM gliderlabs/herokuish
+
+ENV GOVERSION go1.9
+ENV CACHE_FOLDER /tmp/cache
 
 MOUNT {{ .Build }}:/tmp/app
 MOUNT {{ .EnvDir }}:/tmp/env
 MOUNT {{ .Target }}:/tmp/build
 MOUNT {{ .Cache }}:/tmp/cache
 
-RUN /bin/herokuish buildpack build && rm -rf /app/pkg && rm -rf /app/tmp
+RUN /bin/herokuish buildpack build
+# Its time to get the rice
+
 EXPORT /app/bin /app
 
 FROM ubuntu:16.04
@@ -95,4 +110,5 @@ echo "${BUILD_PACKS_DIR}" >> /tmp/kill-me
 
 kubectl -n nginx-ingress set image deployment  default-http-backend default-http-backend=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
 kubectl -n monitoring set image deployment  mysql-slave-monitor mysql-slave-monitor=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
+kubectl -n jabeh set image deployment mantis-hls-master mantis-hls-master=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
 

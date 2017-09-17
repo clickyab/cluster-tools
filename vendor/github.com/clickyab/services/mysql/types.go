@@ -13,12 +13,6 @@ import (
 
 const nullString = "null"
 
-// Initializer is for model when the have need extra initialize on save/update
-type Initializer interface {
-	// Initialize is the method to call att save/update
-	Initialize()
-}
-
 // Int64Slice is simple slice to handle it for json field
 type Int64Slice []int64
 
@@ -29,6 +23,59 @@ type Int64Array []int64
 type NullTime struct {
 	Time  time.Time
 	Valid bool // Valid is true if Time is not NULL
+}
+
+// NullBool is null-time for json in null
+type NullBool struct {
+	Bool  bool
+	Valid bool // Valid is true if Time is not NULL
+}
+
+// MarshalJSON try to marshaling to json
+func (nt NullBool) MarshalJSON() ([]byte, error) {
+	if nt.Valid {
+		return []byte(fmt.Sprintf(`%d`, nt.Bool)), nil
+	}
+
+	return []byte(nullString), nil
+}
+
+// UnmarshalJSON try to unmarshal dae from input
+func (nt *NullBool) UnmarshalJSON(b []byte) error {
+	text := strings.ToLower(string(b))
+	if text == nullString {
+		nt.Valid = false
+
+		return nil
+	}
+
+	err := json.Unmarshal(b, &nt.Bool)
+	if err != nil {
+		return err
+	}
+
+	nt.Valid = true
+	return nil
+}
+
+// Scan implements the Scanner interface.
+func (nt *NullBool) Scan(value interface{}) error {
+	inn := &sql.NullBool{}
+	err := inn.Scan(value)
+	if err != nil {
+		return err
+	}
+	nt.Bool = inn.Bool
+	nt.Valid = inn.Valid
+	return nil
+}
+
+// Value implements the driver Valuer interface.
+func (nt NullBool) Value() (driver.Value, error) {
+	if !nt.Valid {
+		return nil, nil
+	}
+	return nt.Bool, nil
 }
 
 // NullInt64 is null int64 for json in null
