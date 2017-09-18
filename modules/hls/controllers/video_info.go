@@ -17,7 +17,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-var videoSuffixes = []string{".mp4", ".avi", ".mkv", ".flv", ".wmv", ".mov", ".mpg"}
+var videoSuffixes = []string{".mp4", ".avi", ".mkv", ".flv", ".wmv", ".mov", ".mpg", "m4v", "jbh"}
 
 // VideoInfo is the video information
 type VideoInfo struct {
