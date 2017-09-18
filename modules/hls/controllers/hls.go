@@ -19,10 +19,10 @@ import (
 )
 
 var (
-	rootPath   = config.RegisterString("mantis.hls.root_folder", "/home/f0rud/", "the cdn root")
+	rootPath   = config.RegisterString("mantis.hls.root_folder", "/cdn/", "the cdn root")
 	ffmpeg     = config.RegisterString("mantis.hls.ffmpeg", "/usr/bin/ffmpeg", "the ffmpeg binary")
 	ffprobe    = config.RegisterString("mantis.hls.ffmpeg", "/usr/bin/ffprobe", "the ffprobe binary")
-	segmentLen = config.RegisterDuration("mantis.hls.segment_len", 7*time.Second, "segment len")
+	segmentLen = config.RegisterDuration("mantis.hls.segment_len", 6*time.Second, "segment len")
 
 	// comma separated strings
 	resolutions = config.RegisterString("mantis.hls.resolutions", "360,240,144", "video resolution")
