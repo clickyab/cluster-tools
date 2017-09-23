@@ -1,7 +1,6 @@
 package main
 
 import (
-	_ "clickyab.com/cluster-tools/modules/kuber/controllers"
 	"github.com/clickyab/services/config"
 	"github.com/clickyab/services/initializer"
 	"github.com/clickyab/services/shell"
@@ -17,7 +16,6 @@ const (
 func main() {
 	config.Initialize(org, app, prefix)
 	defer initializer.Initialize()()
-
 	sig := shell.WaitExitSignal()
 	logrus.Infof("Signal %s received, Exiting ...", sig)
 }
