@@ -24,9 +24,9 @@ type Node struct {
 var k8sClient *kubernetes.Clientset
 
 func init() {
-	config, err := rest.InClusterConfig()
+	cfg, err := rest.InClusterConfig()
 	assert.Nil(err)
-	k8sClient, err = kubernetes.NewForConfig(config)
+	k8sClient, err = kubernetes.NewForConfig(cfg)
 	assert.Nil(err)
 
 }

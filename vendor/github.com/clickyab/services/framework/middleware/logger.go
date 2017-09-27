@@ -34,7 +34,6 @@ func (w *wrapper) WriteHeader(c int) {
 // Logger is the middleware for log system
 func Logger(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
 		// Start timer
 		start := time.Now()
 		// Process request
@@ -51,7 +50,6 @@ func Logger(next http.HandlerFunc) http.HandlerFunc {
 				"ClientIP": framework.RealIP(r),
 				"Status":   wr.status,
 				"Len":      wr.total,
-				"Cf-ray":   r.Header.Get("CF-RAY"),
 			},
 		).Debug(http.StatusText(wr.status))
 	}
