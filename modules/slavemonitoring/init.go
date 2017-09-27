@@ -8,7 +8,6 @@ import (
 
 	"github.com/clickyab/services/framework/router"
 	"github.com/clickyab/services/mysql"
-	"github.com/rs/xhandler"
 	"github.com/rs/xmux"
 )
 
@@ -18,11 +17,11 @@ var (
 
 type route struct{}
 
-func (route) Routes(mux *xmux.Mux, moountPoint string) {
-	mux.GET("/status/:dbnum", xhandler.HandlerFuncC(monitor))
+func (r route) Routes(mux router.Mux) {
+	mux.GET("/status/:dbnum", r.monitor)
 }
 
-func monitor(ctx context.Context, w http.ResponseWriter, r *http.Request) {
+func (*route) monitor(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 	dbNum := xmux.Param(ctx, "dbnum")
 	slice := regex.FindStringSubmatch(dbNum)
 	if len(slice) != 2 {
