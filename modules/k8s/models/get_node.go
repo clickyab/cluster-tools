@@ -1,9 +1,8 @@
-package controllers
+package models
 
 import (
 	"strings"
 
-	"clickyab.com/cluster-tools/modules/k8s/config"
 	"github.com/clickyab/services/array"
 	"github.com/clickyab/services/assert"
 	"github.com/clickyab/services/config"
@@ -13,11 +12,16 @@ import (
 	"k8s.io/client-go/rest"
 )
 
+var (
+	nodeBlackList   = config.RegisterString("cmon.modules.node.blacklist", "kube-0.clickyab.ae", "do not check these nodes")
+	domainBlackList = config.RegisterString("cmon.modules.domain.blacklist", "jabeh.com,ir.cdn.jabeh.com,cdn.jabeh.com,fr.cdn.jabeh.com,www.jabeh.com", "comma separate domains name")
+)
+
 // Node with ip and status
 type Node struct {
 	Name   string
 	IP     string
-	Status bool
+	Active bool
 	Label  bool
 }
 
@@ -52,11 +56,11 @@ func GetNodes() []Node {
 		var node = Node{
 			Name:   n.Name,
 			IP:     internalIP,
-			Status: false,
+			Active: false,
 		}
 		for _, s := range n.Status.Conditions {
 			if s.Type == v1.NodeConditionType("Ready") && s.Status == v1.ConditionStatus("True") {
-				node.Status = true
+				node.Active = true
 				break
 			}
 		}
@@ -68,7 +72,7 @@ func GetNodes() []Node {
 
 // check if the node not exists in the blacklist
 func checkBlacklist(node v1.Node) bool {
-	blackArr := strings.Split(kcfg.BlackList.String(), ",")
+	blackArr := strings.Split(nodeBlackList.String(), ",")
 	for i := range blackArr {
 		if node.Name == blackArr[i] {
 			return false
@@ -76,8 +80,6 @@ func checkBlacklist(node v1.Node) bool {
 	}
 	return true
 }
-
-var domainBlackList = config.RegisterString("kub.domains.blacklist", "", "comma separate domains name")
 
 // Domains return all domains from ingress
 func Domains() []string {
@@ -99,7 +101,7 @@ func Domains() []string {
 			}
 		}
 	}
-	res := make([]string, 0)
+	var res []string
 	for k := range h {
 		res = append(res, k)
 	}
