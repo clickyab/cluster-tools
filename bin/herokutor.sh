@@ -72,7 +72,7 @@ MOUNT {{ .Cache }}:/tmp/cache
 RUN /bin/herokuish buildpack build && rm -rf /app/pkg && rm -rf /app/tmp
 EXPORT /app/bin /app
 
-FROM ubuntu:16.04
+FROM phusion/baseimage:latest
 IMPORT /app
 
 CMD ["/app/bin/default-http-backend"]
