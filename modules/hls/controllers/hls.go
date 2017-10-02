@@ -62,7 +62,7 @@ func (c *Controller) Routes(r router.Mux) {
 	subTs = regexp.MustCompile("/(.*)/" + seg + "/([0-9]+)/([0-9]+)[.]ts$")
 
 	// TODO : need the quality in route. there is no quality flag here, also a master manifest contain all qualities
-	r.GET("/*path", c.entry)
+	r.GET("/fly/*path", c.entry)
 }
 
 func init() {
