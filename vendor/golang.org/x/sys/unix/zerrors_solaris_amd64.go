@@ -1456,7 +1456,7 @@ var signals = [...]string{
 	15: "terminated",
 	16: "user Signal 1",
 	17: "user Signal 2",
-	18: "child Active Changed",
+	18: "child Status Changed",
 	19: "power-Fail/Restart",
 	20: "window Size Change",
 	21: "urgent Socket Condition",
