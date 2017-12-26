@@ -102,7 +102,7 @@ echo "${BUILD_DIR}" >> /tmp/kill-me
 echo "${BUILD_PACKS_DIR}" >> /tmp/kill-me
 
 kubectl -n ingress-nginx set image deployment  default-http-backend default-http-backend=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
-kubectl -n monitoring set image deployment  mysql-slave-monitor mysql-slave-monitor=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
-kubectl -n jabeh set image deployment mantis-hls-master mantis-hls-master=registry.clickyab.ae/clickyab/${APP}-ffmpeg:${BRANCH}.${COMMITCOUNT} --record
+kubectl -n monitoring set image deployment mysql-slave-monitor mysql-slave-monitor=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
+#kubectl -n jabeh set image deployment mantis-hls-master mantis-hls-master=registry.clickyab.ae/clickyab/${APP}-ffmpeg:${BRANCH}.${COMMITCOUNT} --record
 kubectl -n tools set image deployment cloud-monitor cloud-monitor=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
 
