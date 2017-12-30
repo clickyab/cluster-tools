@@ -1,0 +1,29 @@
+
+<!doctype html>
+<html class="no-js" lang="fa">
+<head>
+    <meta charset="utf-8">
+    <meta charset=utf-8>
+    <title>فیلم/ واکنش ظریف به اظهارات نیکی هیلی</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/6.6.0/alt/video-js-cdn.min.css">
+</head>
+<body>
+<div id="count" video-channel="j81gg5"></div>
+        <div id="video_embed" style="display:block;" >
+            <video id=example-video width=600 height=300 class="video-js vjs-default-skin" controls>
+              <source
+                 src="http://localhost/hls/fly/test2.mp4/6/manifest.m3u8"
+                 type="application/x-mpegURL">
+            </video>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/6.6.0/video.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.12.2/videojs-contrib-hls.js"></script>
+            <script>
+                var player = videojs('example-video');
+                player.play();
+                videojs.log.level(); // "all"
+                videojs.log.history(); // an array of everything that's been logged up to now
+            </script>
+        </div>
+</body>
+</html>
