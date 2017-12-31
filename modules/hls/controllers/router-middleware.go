@@ -16,6 +16,7 @@ import (
 	"github.com/clickyab/services/assert"
 	"github.com/rs/xmux"
 	"github.com/sirupsen/logrus"
+	"github.com/clickyab/services/config"
 )
 
 var (
@@ -30,6 +31,8 @@ type requestData struct {
 	Index       bool // this is a bit rate specific request
 	TSIndex     int  // this is the index of ts requested
 
+	RootFolder string
+	CacheFolder string
 	FullPath string
 	File     string
 	VInfo    *VideoInfo
@@ -40,6 +43,7 @@ func getRequestData(f string) (*requestData, error) {
 		file requestData
 		err  error
 	)
+
 	if parts := index.FindStringSubmatch(f); len(parts) == 2 {
 		// Index request
 		file.File = parts[1]
@@ -58,8 +62,12 @@ func getRequestData(f string) (*requestData, error) {
 	} else {
 		return nil, fmt.Errorf("invalid request")
 	}
+
+	file.RootFolder = rootPath.String()
+	file.CacheFolder = cachePath.String()
 	file.FullPath = filepath.Join(rootPath.String(), file.File)
 	file.VInfo, err = GetVideoInformation(file.FullPath)
+
 	if err != nil {
 		return nil, err
 	}
@@ -87,4 +95,14 @@ func (c *Controller) entry(ctx context.Context, w http.ResponseWriter, r *http.R
 	} else {
 		c.serveSegment(ctx, req, w, r)
 	}
+}
+
+
+// router handler to serve static files
+func (c *Controller) serveStatic(ctx context.Context, w http.ResponseWriter, r *http.Request) { 
+	urlPrefixe := config.GetString("services.framework.controller.mount_point")
+
+	fullPath,_ := filepath.Abs("./modules/hls/static/"+ r.URL.Path[len(urlPrefixe + "static/"):])
+
+	http.ServeFile(w, r, fullPath)
 }

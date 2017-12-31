@@ -39,7 +39,9 @@ func convertPToBitRate(p string) string {
 }
 
 func (c *Controller) serveMasterM3U8(ctx context.Context, req *requestData, w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "#EXTM3U")
+	w.Header().Set("Content-Type", "application/vnd.apple.mpegurl")
+	
+	fmt.Fprint(w, "#EXTM3U\n")
 	for _, p := range strings.Split(resolutions.String(), ",") {
 		fmt.Fprintf(w, "#EXT-X-STREAM-INF:PROGRAM-ID=1, BANDWIDTH=%s, RESOLUTION=%s\n", convertPToBitRate(p), convertPToSize(p))
 		fmt.Fprintf(w, "%s/index.m3u8\n", p)

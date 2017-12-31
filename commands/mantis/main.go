@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+	
 	_ "clickyab.com/cluster-tools/modules/hls/controllers"
 	"github.com/clickyab/services/config"
 	"github.com/clickyab/services/initializer"
@@ -14,6 +16,8 @@ func main() {
 	l := onion.NewDefaultLayer()
 	l.SetDefault("services.framework.controller.mount_point", "/hls")
 	config.Initialize("clickyab", "mantis", "HLS", l)
+	config.DumpConfig(os.Stdout)
+
 	defer initializer.Initialize()()
 
 	sig := shell.WaitExitSignal()

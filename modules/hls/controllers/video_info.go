@@ -23,6 +23,8 @@ var videoSuffixes = []string{".mp4", ".avi", ".mkv", ".flv", ".wmv", ".mov", ".m
 type VideoInfo struct {
 	tag      string  // this field is not required in the outside, and is just for caching
 	Duration float64 `json:"duration"`
+	Directory string
+	Name string
 }
 
 // Decode is the cache decoder
@@ -80,6 +82,7 @@ func getFFMPEGJson(path string) (map[string]interface{}, error) {
 // GetVideoInformation return the video information from executing the ffprobe
 func GetVideoInformation(path string) (*VideoInfo, error) {
 	var res VideoInfo
+
 	if err := kv.Hit(path, &res); err == nil {
 		return &res, nil
 	}
@@ -87,10 +90,13 @@ func GetVideoInformation(path string) (*VideoInfo, error) {
 		return nil, fmt.Errorf("invalid ext")
 	}
 
+	logrus.WithField("video path", path).Debug("path of video")
+
 	info, err := getFFMPEGJson(path)
 	if err != nil {
 		return nil, err
 	}
+
 	logrus.WithField("path", path).WithField("result", info).Debug("ffprobe returned")
 	if _, ok := info["format"]; !ok {
 		return nil, fmt.Errorf("ffprobe data for '%v' does not contain format info", path)
@@ -103,7 +109,12 @@ func GetVideoInformation(path string) (*VideoInfo, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not parse duration (%v) of '%v': %s", format["duration"].(string), path, err)
 	}
-	res = VideoInfo{tag: path, Duration: duration}
+
+	videoPathData := strings.Split(path, "/")
+	fileName := videoPathData[len(videoPathData)-1]
+	fileDirectory := strings.Join(videoPathData[:len(videoPathData)-1], "/")
+
+	res = VideoInfo{tag: path, Duration: duration, Directory: fileDirectory, Name: fileName}
 	_ = kv.Do(&res, time.Hour*60, nil)
 
 	return &res, nil
