@@ -9,7 +9,6 @@ import (
 	"github.com/clickyab/services/framework"
 	"github.com/clickyab/services/framework/router"
 	"github.com/clickyab/services/mysql"
-	"github.com/rs/xhandler"
 	"github.com/rs/xmux"
 )
 
@@ -20,7 +19,7 @@ var (
 type route struct{}
 
 func (r route) Routes(mux framework.Mux) {
-	mux.RootMux().GET("/status/:dbnum", xhandler.HandlerFuncC(r.monitor))
+	mux.GET("status", "/status/:dbnum", r.monitor)
 }
 
 func (*route) monitor(ctx context.Context, w http.ResponseWriter, r *http.Request) {

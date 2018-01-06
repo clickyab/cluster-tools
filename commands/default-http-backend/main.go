@@ -7,6 +7,7 @@ import (
 	"github.com/clickyab/services/initializer"
 	"github.com/clickyab/services/shell"
 	"github.com/sirupsen/logrus"
+	onion "gopkg.in/fzerorubigd/onion.v3"
 )
 
 const (
@@ -16,7 +17,10 @@ const (
 )
 
 func main() {
-	config.Initialize(org, app, prefix)
+	l := onion.NewDefaultLayer()
+	l.SetDefault("services.framework.controller.mount_point", "/")
+
+	config.Initialize(org, app, prefix, l)
 	defer initializer.Initialize()()
 
 	sig := shell.WaitExitSignal()
