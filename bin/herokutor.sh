@@ -97,7 +97,7 @@ EOF
 TARGET=$(mktemp -d)
 pushd ${TEMPORARY}
 # Actual build
-rocker build --push -var Build=${BUILD} -var EnvDir=${VARS} -var Cache=${CACHE} -var Target=${TARGET} -var Version=${BRANCH}.${COMMITCOUNT} -var App=${APP}
+rocker build --push -var Build=${BUILD} -var EnvDir=${VARS} -var Cache=${CACHE} -var Target=${TARGET} -var Version=${COMMITCOUNT} -var App=${APP}_${BRANCH}
 popd
 
 echo "${VARS}" >> /tmp/kill-me
@@ -110,4 +110,5 @@ kubectl -n ingress-nginx set image deployment  default-http-backend default-http
 kubectl -n monitoring set image deployment mysql-slave-monitor mysql-slave-monitor=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
 #kubectl -n jabeh set image deployment mantis-hls-master mantis-hls-master=registry.clickyab.ae/clickyab/${APP}-ffmpeg:${BRANCH}.${COMMITCOUNT} --record
 kubectl -n tools set image deployment cloud-monitor cloud-monitor=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
+kubectl -n tools set image deployment rabbit-monitor rabbit-monitor=registry.clickyab.ae/clickyab/${APP}:${BRANCH}.${COMMITCOUNT} --record
 
