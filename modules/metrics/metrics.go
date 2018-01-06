@@ -10,6 +10,7 @@ import (
 	"github.com/clickyab/services/config"
 	"github.com/clickyab/services/framework"
 	"github.com/clickyab/services/framework/router"
+	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -40,7 +41,8 @@ func (rr *route) monitor(ctx context.Context, w http.ResponseWriter, r *http.Req
 	for i := range rr.queue {
 		data, err := getStatus(rr.queue[i].VHost, rr.queue[i].Queue)
 		if err != nil {
-			fmt.Fprintf(buf, "# %s/%s Err!: %s\n", rr.queue[i].VHost, rr.queue[i].Queue, err)
+			logrus.Error(err)
+			fmt.Fprintf(buf, "# %s/%s Err!\n", rr.queue[i].VHost, rr.queue[i].Queue)
 			continue
 		}
 		fmt.Fprintf(buf, "# %s/%s Consumers : %d Messages : %d\n", rr.queue[i].VHost, rr.queue[i].Queue, data.Consumers, data.Messages)
