@@ -17,7 +17,7 @@ import (
 )
 
 var (
-	dsn      = config.RegisterString("metric.amqp.dsn", "amqp://cluster-tools:bita123@127.0.0.1:5672/", "no vhost please!")
+	dsn      = config.RegisterString("metrics.amqp.dsn", "amqp://cluster-tools:bita123@127.0.0.1:5672/", "no vhost please!")
 	tryLimit = config.RegisterDuration("services.amqp.try_limit", time.Minute, "")
 	metrics  = config.RegisterString("metrics.queue_names", "", "comma separated list of vhost/queue")
 )
