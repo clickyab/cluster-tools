@@ -12,9 +12,10 @@ import (
 )
 
 type atomicKiwiRedis struct {
-	key  string
-	v    map[string]int64
-	lock sync.Mutex
+	key string
+	v   map[string]int64
+	sync.Mutex
+	duration time.Duration
 }
 
 func (kr *atomicKiwiRedis) TTL() time.Duration {
@@ -24,12 +25,21 @@ func (kr *atomicKiwiRedis) TTL() time.Duration {
 	return r
 }
 
-func (kr *atomicKiwiRedis) Drop() error {
-	kr.lock.Lock()
-	defer kr.lock.Unlock()
+func (kr *atomicKiwiRedis) Drop(s ...string) error {
+	kr.Lock()
+	defer kr.Unlock()
 
-	kr.v = make(map[string]int64)
-	d := aredis.Client.Del(kr.key)
+	if len(s) == 0 {
+		kr.v = make(map[string]int64)
+		d := aredis.Client.Del(kr.key)
+		return d.Err()
+	}
+
+	for i := range s {
+		delete(kr.v, s[i])
+	}
+	// Ignore the error
+	d := aredis.Client.HDel(kr.key, s...)
 	return d.Err()
 }
 
@@ -39,32 +49,34 @@ func (kr *atomicKiwiRedis) Key() string {
 }
 
 // IncSubKey for increasing sub key
-func (kr *atomicKiwiRedis) IncSubKey(key string, value int64) kv.AKiwi {
+func (kr *atomicKiwiRedis) IncSubKey(key string, value int64) int64 {
 	res := aredis.Client.HIncrBy(kr.key, key, value)
 	if res.Err() != nil {
 		kr.v[key] = value
-		return kr
+		return kr.v[key]
 	}
 	r, err := res.Result()
 	if err != nil {
 		kr.v[key] = value
-		return kr
+		return r
 	}
 	kr.v[key] = r
-	return kr
+	aredis.Client.Expire(key, kr.duration)
+	return r
 }
 
 // IncSubKey for decreasing sub key
-func (kr *atomicKiwiRedis) DecSubKey(key string, value int64) kv.AKiwi {
+func (kr *atomicKiwiRedis) DecSubKey(key string, value int64) int64 {
 	return kr.IncSubKey(key, -value)
 }
 
 // SubKey return a key
 func (kr *atomicKiwiRedis) SubKey(key string) int64 {
-	kr.lock.Lock()
-	defer kr.lock.Unlock()
+	kr.Lock()
+	defer kr.Unlock()
 
 	if v, ok := kr.v[key]; ok {
+		aredis.Client.Expire(key, kr.duration)
 		return v
 	}
 	res := aredis.Client.HIncrBy(kr.key, key, 0)
@@ -103,17 +115,12 @@ func (kr *atomicKiwiRedis) AllKeys() map[string]int64 {
 	return kr.v
 }
 
-// Save the entire keys (mostly first time)
-func (kr *atomicKiwiRedis) Save(t time.Duration) error {
-	b := aredis.Client.Expire(kr.key, t)
-	return b.Err()
-}
-
 // NewRedisAEAVStore return a redis store for eav
-func newRedisAEAVStore(key string) kv.AKiwi {
+func newRedisAEAVStore(key string, dur time.Duration) kv.AKiwi {
 	return &atomicKiwiRedis{
-		key:  key,
-		v:    make(map[string]int64),
-		lock: sync.Mutex{},
+		key:      key,
+		v:        make(map[string]int64),
+		Mutex:    sync.Mutex{},
+		duration: dur,
 	}
 }

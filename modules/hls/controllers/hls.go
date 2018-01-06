@@ -11,8 +11,10 @@ import (
 	"fmt"
 
 	"github.com/clickyab/services/config"
+	"github.com/clickyab/services/framework"
 	"github.com/clickyab/services/framework/controller"
 	"github.com/clickyab/services/framework/router"
+	"github.com/rs/xhandler"
 	"github.com/sirupsen/logrus"
 )
 
@@ -55,14 +57,14 @@ type Controller struct {
 }
 
 // Routes is the controller registration function
-func (c *Controller) Routes(r router.Mux) {
+func (c *Controller) Routes(r framework.Mux) {
 	seg := fmt.Sprint(int(segmentLen.Duration().Seconds()))
 	index = regexp.MustCompile("/(.*)/" + seg + "/manifest[.]m3u8$")
 	subIndex = regexp.MustCompile("/(.*)/" + seg + "/([0-9]+)/index[.]m3u8$")
 	subTs = regexp.MustCompile("/(.*)/" + seg + "/([0-9]+)/([0-9]+)[.]ts$")
 
 	// TODO : need the quality in route. there is no quality flag here, also a master manifest contain all qualities
-	r.GET("/fly/*path", c.entry)
+	r.RootMux().GET("/fly/*path", xhandler.HandlerFuncC(c.entry))
 }
 
 func init() {

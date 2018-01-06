@@ -8,55 +8,43 @@ import (
 
 // Serializable represent the object that can be serialized
 type Serializable interface {
-	// Decode is the decoder of this function
-	Decode(io.Writer) error
-	// Encode is the encoder function
-	Encode(io.Reader) error
-}
-
-// Cacheable is the object that can be cached into
-type Cacheable interface {
-	Serializable
-
-	String() string
+	// Encode is the encode of this function
+	Encode(io.Writer) error
+	// Decode is the decode function
+	Decode(io.Reader) error
 }
 
 // CacheProvider is the cacheFactory backend
 type CacheProvider interface {
 	// Do is called to store the cacheFactory
-	Do(Cacheable, time.Duration) error
+	Do(string, Serializable, time.Duration) error
 	// Hit called when we need to load the cacheFactory
-	Hit(string, Cacheable) error
+	Hit(string, Serializable) error
 }
 
 // CacheWrapper is a provider with support for inner entity
 type CacheWrapper interface {
-	Cacheable
+	Serializable
 	// Entity return the cached object
 	Entity() interface{}
 }
 
 type cachable struct {
 	entity interface{}
-	key    string
 }
 
 var cacheFactory CacheProvider
 
-// Decode try to decode cookie profile into gob
-func (cp *cachable) Decode(w io.Writer) error {
+// Encode try to decode cookie profile into gob
+func (cp *cachable) Encode(w io.Writer) error {
 	enc := gob.NewEncoder(w)
 	return enc.Encode(cp.entity)
 }
 
-// Encode try to encode cookie profile from gob
-func (cp *cachable) Encode(i io.Reader) error {
+// Decode try to encode cookie profile from gob
+func (cp *cachable) Decode(i io.Reader) error {
 	dnc := gob.NewDecoder(i)
 	return dnc.Decode(cp.entity)
-}
-
-func (cp *cachable) String() string {
-	return cp.key
 }
 
 func (cp *cachable) Entity() interface{} {
@@ -64,18 +52,18 @@ func (cp *cachable) Entity() interface{} {
 }
 
 // Do the entity
-func Do(e Cacheable, t time.Duration, err error) error {
+func Do(k string, e Serializable, t time.Duration, err error) error {
 	if err != nil {
 		return err
 	}
 	regLock.RLock()
 	defer regLock.RUnlock()
 
-	return cacheFactory.Do(e, t)
+	return cacheFactory.Do(k, e, t)
 }
 
 // Hit the cacheFactory
-func Hit(key string, out Cacheable) error {
+func Hit(key string, out Serializable) error {
 	regLock.RLock()
 	defer regLock.RUnlock()
 
@@ -83,9 +71,8 @@ func Hit(key string, out Cacheable) error {
 }
 
 // CreateWrapper return an cachable object for this ntt
-func CreateWrapper(key string, ntt interface{}) CacheWrapper {
+func CreateWrapper(ntt interface{}) CacheWrapper {
 	return &cachable{
-		key:    key,
 		entity: ntt,
 	}
 }
