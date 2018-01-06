@@ -50,7 +50,7 @@ func getSubDomain(s string) (string, string) {
 }
 
 func (l *looper) Initialize(ctx context.Context) {
-	safe.ContinuesGoRoutine(func(c context.CancelFunc) { l.loop(ctx, c) }, 10*time.Second)
+	safe.ContinuesGoRoutine(ctx, func(c context.CancelFunc) { l.loop(ctx, c) }, 10*time.Second)
 }
 
 func (l *looper) checkDomain(s []string) bool {

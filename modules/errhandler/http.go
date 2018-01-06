@@ -1,6 +1,7 @@
 package errhandler
 
 import (
+	"github.com/clickyab/services/framework"
 	"github.com/clickyab/services/framework/router"
 )
 
@@ -8,9 +9,9 @@ type initRouter struct {
 }
 
 // Ignoring the mount path
-func (initRouter) Routes(mux router.Mux) {
-	mux.GET("/healthz", healthz)
-	mux.GET("/", errCheck)
+func (initRouter) Routes(mux framework.Mux) {
+	mux.GET("healthz", "/healthz", healthz)
+	mux.GET("root", "/", errCheck)
 }
 
 func init() {

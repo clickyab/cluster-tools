@@ -1,10 +1,10 @@
 package config
 
 import (
+	"io/ioutil"
 	"runtime"
 
 	"github.com/clickyab/services/assert"
-
 	"github.com/fzerorubigd/expand"
 	"github.com/sirupsen/logrus"
 	onion "gopkg.in/fzerorubigd/onion.v3"
@@ -76,6 +76,7 @@ func SetConfigParameter() {
 	} else {
 		logrus.SetFormatter(&logrus.TextFormatter{ForceColors: false, DisableColors: true})
 		logrus.SetLevel(logrus.WarnLevel)
+		logrus.SetOutput(ioutil.Discard) // Discard the stdout logging
 	}
 
 	numcpu := cfg.MaxCPUAvailable
@@ -94,6 +95,10 @@ func SetConfigParameter() {
 func setDescription(key, desc string) {
 	lock.Lock()
 	defer lock.Unlock()
+	if d, ok := configs[key]; ok && d != "" && desc == "" {
+		// if the new description is empty and the old one is not, ignore the new one
+		return
+	}
 	configs[key] = desc
 }
 

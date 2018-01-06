@@ -16,6 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.network "forwarded_port", guest: 8090,    	host: 80       # nginx
+  config.vm.network "forwarded_port", guest: 15672,    	host: 15672    # rmq management
   config.vm.network "forwarded_port", guest: 22,        host: 5555     # ssh server
   config.vm.network "forwarded_port", guest: 9898,      host: 9898     # ssh server
   config.vm.synced_folder ".", "/home/develop/go/src/clickyab.com/cluster-tools", owner: "develop", group: "develop", create: true

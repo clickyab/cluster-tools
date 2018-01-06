@@ -79,6 +79,8 @@ CMD ["/app/bin/default-http-backend"]
 
 TAG registry.clickyab.ae/clickyab/{{ .App }}:{{ .Version }}
 PUSH registry.clickyab.ae/clickyab/{{ .App }}:{{ .Version }}
+TAG registry.clickyab.ae/clickyab/{{ .App }}:latest
+PUSH registry.clickyab.ae/clickyab/{{ .App }}:latest
 
 FROM registry.clickyab.ae/clickyab/jabeh-base:latest
 IMPORT /app
@@ -87,6 +89,9 @@ CMD ["/app/bin/mantis"]
 
 TAG registry.clickyab.ae/clickyab/{{ .App }}-ffmpeg:{{ .Version }}
 PUSH registry.clickyab.ae/clickyab/{{ .App }}-ffmpeg:{{ .Version }}
+TAG registry.clickyab.ae/clickyab/{{ .App }}-ffmpeg:latest
+PUSH registry.clickyab.ae/clickyab/{{ .App }}-ffmpeg:latest
+
 EOF
 
 TARGET=$(mktemp -d)

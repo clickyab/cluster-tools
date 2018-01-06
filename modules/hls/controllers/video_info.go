@@ -25,13 +25,13 @@ type VideoInfo struct {
 	Duration float64 `json:"duration"`
 }
 
-// Decode is the cache decoder
-func (vi VideoInfo) Decode(w io.Writer) error {
+// Encode is the cache encoder
+func (vi VideoInfo) Encode(w io.Writer) error {
 	return binary.Write(w, binary.BigEndian, vi.Duration)
 }
 
-// Encode is the cache encoder
-func (vi *VideoInfo) Encode(r io.Reader) error {
+// Decode is the cache decoder
+func (vi *VideoInfo) Decode(r io.Reader) error {
 	var d float64
 	if err := binary.Read(r, binary.BigEndian, &d); err != nil {
 		return err
@@ -104,7 +104,7 @@ func GetVideoInformation(path string) (*VideoInfo, error) {
 		return nil, fmt.Errorf("could not parse duration (%v) of '%v': %s", format["duration"].(string), path, err)
 	}
 	res = VideoInfo{tag: path, Duration: duration}
-	_ = kv.Do(&res, time.Hour*60, nil)
+	_ = kv.Do(res.String(), &res, time.Hour*60, nil)
 
 	return &res, nil
 }
