@@ -10,7 +10,6 @@ type initRouter struct {
 
 // Ignoring the mount path
 func (initRouter) Routes(mux framework.Mux) {
-	mux.GET("healthz", "/healthz", healthz)
 	mux.GET("root", "/", errCheck)
 }
 
