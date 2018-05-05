@@ -2,14 +2,10 @@ package k8s
 
 import (
 	"context"
-
-	"time"
-
-	"strings"
-
-	"sort"
-
 	"encoding/json"
+	"sort"
+	"strings"
+	"time"
 
 	"clickyab.com/cluster-tools/modules/k8s/models"
 	"github.com/clickyab/services/assert"
@@ -50,7 +46,7 @@ func getSubDomain(s string) (string, string) {
 }
 
 func (l *looper) Initialize(ctx context.Context) {
-	safe.ContinuesGoRoutine(ctx, func(c context.CancelFunc) { l.loop(ctx, c) }, 10*time.Second)
+	safe.ContinuesGoRoutine(ctx, func(c context.CancelFunc) time.Duration { l.loop(ctx, c); return 10 * time.Second })
 }
 
 func (l *looper) checkDomain(s []string) bool {
